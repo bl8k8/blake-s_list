@@ -1,0 +1,8 @@
+#Header {
+  background-color: rgb(155, 252, 155);
+  box-shadow: 2px 2px 7px 1px #1c6ea4;
+  padding: 30px;
+  border: 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
