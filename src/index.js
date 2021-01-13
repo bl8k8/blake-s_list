@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { getPosts } from "./api/index";
+import { getCurrentUser } from "./auth";
+import Button from "./components/Button";
+import Header from "./components/Header";
+import Post from "./components/Post";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
-import App from "./components/App";
+const App = () => {
+  const [posts, setPosts] = useState([]);
+  const [messages, setInbox] = useState([]);
+  useEffect(async () => {
+    await getPosts().then((response) => {
+      setPosts(response);
+    });
+  }, []);
+
+  return (
+    <div>
+      <Header />
+      <Post setPosts={setPosts} posts={posts} />
+    </div>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById("app"));

@@ -9,15 +9,21 @@ import {
   Redirect,
 } from "react-router-dom";
 import { getPosts } from "../api";
-const Post = () => {
-  return (
-    <div id="post">
-      <h3 id="Title"> This object</h3>
-      <div id="author"> My Name</div>
-      <div id="description">Take this Thing</div>
-      <a id="picture">Placeholder Text</a>
-    </div>
-  );
+const Post = (props) => {
+  const { posts, setPosts } = props;
+  const newArr = [];
+  posts.forEach((post, index) => {
+    newArr.push(
+      <div id="post">
+        <h3 id="Title">{post.title}</h3>
+        <div id="author">{post.author.username}</div>
+        <div id="description">{post.description}</div>
+        <Button text={"Message"} />
+        <Button text={"Delete Post"} />
+      </div>
+    );
+  });
+  return newArr;
 };
 
 export default Post;

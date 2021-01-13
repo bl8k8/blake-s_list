@@ -4,8 +4,10 @@ const Button = (props) => {
   return (
     <button
       id={"button"}
-      onClick={() => {
-        console.log("you pressed the button");
+      onClick={(event) => {
+        event.preventDefault();
+
+        props.handler();
       }}
       value="This is a sample"
     >
