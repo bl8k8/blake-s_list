@@ -18,8 +18,8 @@ export async function getUser(name, pass) {
     const { data } = await axios.post(`${BASE}/users/login`, {
       user: { username: name, password: pass },
     });
-    console.log(data);
-    return data;
+    console.log(data.data.token);
+    getUserInfo(data.data.token);
   } catch (error) {
     throw error;
   }
@@ -40,7 +40,34 @@ export async function registerUser(name, pass) {
   })
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
+      if (result.success) {
+        return result.data.token;
+      } else {
+        alert(
+          "That user is already taken. Click ok to close this then please try another username."
+        );
+      }
     })
-    .catch(console.error);
+    .then((response) => {
+      if (response) {
+        getUserInfo(response);
+      }
+    });
+}
+
+export async function getUserInfo(token) {
+  await axios
+    .get(
+      `${BASE}/users/me`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    )
+    .then((result) => {
+      console.log(result);
+    });
 }

@@ -7,6 +7,7 @@ import { getUser } from "../api/index";
 const Input = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState({});
 
   return (
     <form>
@@ -31,11 +32,22 @@ const Input = () => {
 
       <Button
         text={"Register"}
-        handler={async () => registerUser(username, password)}
+        handler={() => {
+          registerUser(username, password).then((response) => {
+            console.log(response);
+          });
+
+          console.log("now");
+        }}
       />
       <Button
         text={"Log in"}
-        handler={async () => getUser(username, password)}
+        handler={() => {
+          getUser(username, password).then((info) => {
+            console.log(info);
+            setUser(info);
+          });
+        }}
       />
     </form>
   );
