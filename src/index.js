@@ -15,6 +15,7 @@ import {
 const App = () => {
   const [posts, setPosts] = useState([]);
   const [messages, setInbox] = useState([]);
+  const [user, setUser] = useState([]);
   useEffect(async () => {
     await getPosts().then((response) => {
       setPosts(response);
@@ -23,7 +24,7 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      <Header posts={posts} setPosts={setPosts} user={user} setUser={setUser} />
       <Post setPosts={setPosts} posts={posts} />
     </div>
   );

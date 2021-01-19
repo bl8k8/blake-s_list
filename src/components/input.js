@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Button from "./Button";
 import { registerUser } from "../api/index";
-import { getUser } from "../api/index";
+import { getUser, getUserInfo } from "../api/index";
 
-const Input = () => {
+const Input = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState({});
+
+  const { user, setUser } = props;
 
   return (
     <form>
@@ -34,7 +35,7 @@ const Input = () => {
         text={"Register"}
         handler={() => {
           registerUser(username, password).then((response) => {
-            console.log(response);
+            setUser(response);
           });
 
           console.log("now");
@@ -43,8 +44,9 @@ const Input = () => {
       <Button
         text={"Log in"}
         handler={() => {
+          console.log("handler invoked"); // <== new line here
           getUser(username, password).then((info) => {
-            console.log(info);
+            console.log("FLag", info);
             setUser(info);
           });
         }}

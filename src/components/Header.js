@@ -10,14 +10,15 @@ import {
   Redirect,
 } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
+  const { user, setUser, posts, setPosts } = props;
   return (
     <div id="Header">
       <Button text={"My Messages"} />
       <Button text={"My Posts"} />
       <Button text={"Log Out"} />
 
-      <Input />
+      <Input user={user} setUser={setUser} />
     </div>
   );
 };

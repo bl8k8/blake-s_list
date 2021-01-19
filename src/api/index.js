@@ -13,50 +13,35 @@ export async function getPosts() {
     throw error;
   }
 }
+
 export async function getUser(name, pass) {
   try {
-    const { data } = await axios.post(`${BASE}/users/login`, {
+    axios.post(`${BASE}/users/login`, {
       user: { username: name, password: pass },
     });
     console.log(data.data.token);
-    getUserInfo(data.data.token);
+    const userInfo = await getUserInfo(data.data.token);
+    return userInfo;
   } catch (error) {
     throw error;
   }
 }
-
 export async function registerUser(name, pass) {
-  await fetch(`${BASE}/users/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: {
-        username: name,
-        password: pass,
-      },
-    }),
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      if (result.success) {
-        return result.data.token;
-      } else {
-        alert(
-          "That user is already taken. Click ok to close this then please try another username."
-        );
-      }
+  return axios
+    .post(`${BASE}/users/register`, {
+      user: { username: name, password: pass },
     })
-    .then((response) => {
-      if (response) {
-        getUserInfo(response);
+    .then(async (response) => {
+      console.log(response);
+      if (response.data.data.token) {
+        const userInfo = await getUserInfo(response.data.data.token);
+        return userInfo;
       }
     });
 }
 
 export async function getUserInfo(token) {
-  await axios
+  return axios
     .get(
       `${BASE}/users/me`,
 
@@ -68,6 +53,7 @@ export async function getUserInfo(token) {
       }
     )
     .then((result) => {
-      console.log(result);
+      console.log(result.data);
+      return result.data;
     });
 }
