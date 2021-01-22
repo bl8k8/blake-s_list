@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 const Button = (props) => {
   return (
     <button
-      id={"button"}
+      className={props.id}
       onClick={(event) => {
         event.preventDefault();
 

@@ -16,11 +16,11 @@ export async function getPosts() {
 
 export async function getUser(name, pass) {
   try {
-    axios.post(`${BASE}/users/login`, {
+    const data = await axios.post(`${BASE}/users/login`, {
       user: { username: name, password: pass },
     });
-    console.log(data.data.token);
-    const userInfo = await getUserInfo(data.data.token);
+    console.log(data.data.data.token);
+    const userInfo = await getUserInfo(data.data.data.token);
     return userInfo;
   } catch (error) {
     throw error;
@@ -32,7 +32,6 @@ export async function registerUser(name, pass) {
       user: { username: name, password: pass },
     })
     .then(async (response) => {
-      console.log(response);
       if (response.data.data.token) {
         const userInfo = await getUserInfo(response.data.data.token);
         return userInfo;

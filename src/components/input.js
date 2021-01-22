@@ -7,6 +7,7 @@ import { getUser, getUserInfo } from "../api/index";
 const Input = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isHidden, setIsHidden] = useState(false);
 
   const { user, setUser } = props;
 
@@ -30,24 +31,37 @@ const Input = (props) => {
           setPassword(event.target.value);
         }}
       ></input>
-
       <Button
+        id={"hide"}
         text={"Register"}
         handler={() => {
           registerUser(username, password).then((response) => {
             setUser(response);
+            const target = document.getElementsByClassName("hide");
+            const hide = [...target];
+            hide.forEach((value, index) => {
+              value.style.display = "none";
+            });
           });
 
           console.log("now");
         }}
       />
       <Button
+        id={"hide"}
         text={"Log in"}
         handler={() => {
           console.log("handler invoked"); // <== new line here
           getUser(username, password).then((info) => {
             console.log("FLag", info);
             setUser(info);
+            const target = document.getElementsByClassName("hide");
+            const hide = [...target];
+
+            console.log(hide);
+            hide.forEach((value, index) => {
+              value.style.display = "none";
+            });
           });
         }}
       />
