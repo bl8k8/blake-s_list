@@ -18,8 +18,8 @@ const Post = (props) => {
         <h3 id="Title">{post.title}</h3>
         <div id="author">{post.author.username}</div>
         <div id="description">{post.description}</div>
-        <Button text={"Message"} />
-        <Button text={"Delete Post"} />
+        <Button style={{ display: "none" }} id={"show"} text={"Message"} />
+        <Button style={{ display: "none" }} id={"show"} text={"Delete Post"} />
       </div>
     );
   });

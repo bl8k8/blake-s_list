@@ -38,13 +38,16 @@ const Input = (props) => {
           registerUser(username, password).then((response) => {
             setUser(response);
             const target = document.getElementsByClassName("hide");
-            const hide = [...target];
+            const hide = [...leave];
+            const reveal = document.getElementsByClassName("show");
+            const show = [...reveal];
+            show.forEach((value, index) => {
+              value.style.display = "block";
+            });
             hide.forEach((value, index) => {
               value.style.display = "none";
             });
           });
-
-          console.log("now");
         }}
       />
       <Button
@@ -55,10 +58,13 @@ const Input = (props) => {
           getUser(username, password).then((info) => {
             console.log("FLag", info);
             setUser(info);
-            const target = document.getElementsByClassName("hide");
-            const hide = [...target];
-
-            console.log(hide);
+            const leave = document.getElementsByClassName("hide");
+            const hide = [...leave];
+            const reveal = document.getElementsByClassName("show");
+            const show = [...reveal];
+            show.forEach((value, index) => {
+              value.style.display = "block";
+            });
             hide.forEach((value, index) => {
               value.style.display = "none";
             });

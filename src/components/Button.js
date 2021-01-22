@@ -4,6 +4,7 @@ const Button = (props) => {
   return (
     <button
       className={props.id}
+      style={props.style}
       onClick={(event) => {
         event.preventDefault();
 
