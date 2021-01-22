@@ -1,4 +1,5 @@
 import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 const BASE = "https://strangers-things.herokuapp.com/api/2007-UNF-RM-WEB-PT";
 
@@ -20,6 +21,7 @@ export async function getUser(name, pass) {
       user: { username: name, password: pass },
     });
     console.log(data.data.data.token);
+
     const userInfo = await getUserInfo(data.data.data.token);
     return userInfo;
   } catch (error) {

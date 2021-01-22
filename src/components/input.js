@@ -36,6 +36,7 @@ const Input = (props) => {
         text={"Register"}
         handler={() => {
           registerUser(username, password).then((response) => {
+            console.log(response);
             setUser(response);
             const target = document.getElementsByClassName("hide");
             const hide = [...leave];
@@ -55,9 +56,9 @@ const Input = (props) => {
         text={"Log in"}
         handler={() => {
           console.log("handler invoked"); // <== new line here
-          getUser(username, password).then((info) => {
-            console.log("FLag", info);
-            setUser(info);
+          getUser(username, password).then((response) => {
+            console.log(response);
+            setUser(response);
             const leave = document.getElementsByClassName("hide");
             const hide = [...leave];
             const reveal = document.getElementsByClassName("show");
