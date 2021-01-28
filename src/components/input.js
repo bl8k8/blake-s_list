@@ -7,9 +7,8 @@ import { getUser, getUserInfo } from "../api/index";
 const Input = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isHidden, setIsHidden] = useState(false);
 
-  const { user, setUser } = props;
+  const { user, setUser, token, setToken } = props;
 
   return (
     <form>
@@ -24,52 +23,49 @@ const Input = (props) => {
       ></input>
       <label>Password:</label>
       <input
-        type="text"
+        type="password"
         id="password"
         onInput={(event) => {
           event.preventDefault();
           setPassword(event.target.value);
         }}
       ></input>
+
       <Button
-        id={"hide"}
         text={"Register"}
-        handler={() => {
-          registerUser(username, password).then((response) => {
-            console.log(response);
-            setUser(response);
-            const target = document.getElementsByClassName("hide");
-            const hide = [...leave];
-            const reveal = document.getElementsByClassName("show");
-            const show = [...reveal];
-            show.forEach((value, index) => {
-              value.style.display = "block";
+        handler={async () => {
+          await registerUser(username, password)
+            .then(async (info) => {
+              if (info.data.data.token) {
+                setToken(info.data.data.token);
+                const userInfo = await getUserInfo(info.data.data.token);
+                return userInfo;
+              }
+            })
+            .then((response) => {
+              console.log(response);
+              setUser(response);
             });
-            hide.forEach((value, index) => {
-              value.style.display = "none";
-            });
-          });
         }}
       />
+
       <Button
-        id={"hide"}
         text={"Log in"}
-        handler={() => {
-          console.log("handler invoked"); // <== new line here
-          getUser(username, password).then((response) => {
-            console.log(response);
-            setUser(response);
-            const leave = document.getElementsByClassName("hide");
-            const hide = [...leave];
-            const reveal = document.getElementsByClassName("show");
-            const show = [...reveal];
-            show.forEach((value, index) => {
-              value.style.display = "block";
+        handler={async () => {
+          await getUser(username, password)
+            .then(async (info) => {
+              console.log(info);
+              if (info.data.data.token) {
+                setToken(info.data.data.token);
+                const userInfo = await getUserInfo(info.data.data.token);
+                return userInfo;
+              }
+            })
+            .then((response) => {
+              console.log(token);
+              console.log(response);
+              setUser(response);
             });
-            hide.forEach((value, index) => {
-              value.style.display = "none";
-            });
-          });
         }}
       />
     </form>
