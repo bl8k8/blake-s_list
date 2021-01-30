@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { getPosts } from "./api/index";
-import { getCurrentUser } from "./auth";
-import Button from "./components/Button";
+
 import Header from "./components/Header";
 import Post from "./components/Post";
 import NewPost from "./components/NewPost";
@@ -10,7 +9,7 @@ import Search from "./components/Search";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [messages, setMessages] = useState([]);
+
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
 
