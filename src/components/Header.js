@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
+
 import Button from "./Button";
 import "./Header.css";
 import Input from "./Input";
@@ -9,12 +9,10 @@ const Header = (props) => {
   const {
     user,
     setUser,
-    posts,
+
     setPosts,
     token,
     setToken,
-    messages,
-    setMessages,
   } = props;
 
   return (
@@ -33,8 +31,7 @@ const Header = (props) => {
             handler={() => {
               getPosts(token).then((response) => {
                 const userPosts = [];
-                response.map((item, index) => {
-                  console.log(item);
+                response.map((item) => {
                   item.messages[0] ? userPosts.push(item) : null;
                 });
                 setPosts(userPosts);
@@ -45,10 +42,9 @@ const Header = (props) => {
           <Button
             text={"My Posts"}
             handler={() => {
-              getPosts().then((response) => {
+              getPosts(token).then((response) => {
                 const userPosts = [];
-                response.map((item, index) => {
-                  console.log(item);
+                response.map((item) => {
                   if (item.author.username === user.data.username) {
                     userPosts.push(item);
                   }
@@ -66,12 +62,7 @@ const Header = (props) => {
           />
         </>
       ) : (
-        <Input
-          user={user}
-          setUser={setUser}
-          token={token}
-          setToken={setToken}
-        />
+        <Input setUser={setUser} setToken={setToken} />
       )}
     </div>
   );

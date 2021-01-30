@@ -7,14 +7,6 @@ import Header from "./components/Header";
 import Post from "./components/Post";
 import NewPost from "./components/NewPost";
 import Search from "./components/Search";
-import {
-  BrowserRouter as Router,
-  useHistory,
-  Route,
-  Switch,
-  Redirect,
-  Link,
-} from "react-router-dom";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -45,7 +37,7 @@ const App = () => {
         </div>
         {user ? (
           <>
-            <NewPost setPosts={setPosts} token={token} />
+            <NewPost token={token} />
           </>
         ) : null}
       </div>
@@ -53,9 +45,4 @@ const App = () => {
   );
 };
 
-ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-  document.getElementById("app")
-);
+ReactDOM.render(<App />, document.getElementById("app"));

@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
+
 import Button from "./Button";
 import Message from "./Message";
 import "./Post.css";
 import { deletePost } from "../api/index";
-import {
-  BrowserRouter as Router,
-  useHistory,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+
 import { getPosts } from "../api";
 const Post = (props) => {
   const { posts, setPosts, user, token } = props;
@@ -54,7 +48,6 @@ const Post = (props) => {
                 <Button
                   text={"Delete Post"}
                   handler={() => {
-                    console.log(token);
                     deletePost(token, post._id).then(async (response) => {
                       await getPosts(token).then(async (response) => {
                         setPosts(response);

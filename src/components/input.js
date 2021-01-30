@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
+
 import Button from "./Button";
 import { registerUser } from "../api/index";
 import { getUser, getUserInfo } from "../api/index";
@@ -8,7 +8,7 @@ const Input = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user, setUser, token, setToken } = props;
+  const { setUser, setToken } = props;
 
   return (
     <form>
@@ -43,7 +43,6 @@ const Input = (props) => {
               }
             })
             .then((response) => {
-              console.log(response);
               setUser(response);
             });
         }}
@@ -54,7 +53,6 @@ const Input = (props) => {
         handler={async () => {
           await getUser(username, password)
             .then(async (info) => {
-              console.log(info);
               if (info.data.data.token) {
                 setToken(info.data.data.token);
                 const userInfo = await getUserInfo(info.data.data.token);

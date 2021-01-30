@@ -1,5 +1,4 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
 
 const BASE = "https://strangers-things.herokuapp.com/api/2007-UNF-RM-WEB-PT";
 export async function deletePost(token, postID) {
@@ -47,7 +46,6 @@ export async function sendMessage(token, postID, information) {
   );
 }
 export async function createPost(token, titl, descript, pric, deliver) {
-  console.log(token);
   return await axios.post(
     `${BASE}/posts`,
     {
@@ -68,19 +66,19 @@ export async function createPost(token, titl, descript, pric, deliver) {
   );
 }
 
-export async function getUser(name, pass) {
+export function getUser(name, pass) {
   return axios.post(`${BASE}/users/login`, {
     user: { username: name, password: pass },
   });
 }
 
-export async function registerUser(name, pass) {
+export function registerUser(name, pass) {
   return axios.post(`${BASE}/users/register`, {
     user: { username: name, password: pass },
   });
 }
 
-export async function getUserInfo(token) {
+export function getUserInfo(token) {
   return axios
     .get(
       `${BASE}/users/me`,
@@ -93,7 +91,6 @@ export async function getUserInfo(token) {
       }
     )
     .then((result) => {
-      console.log(result.data);
       return result.data;
     });
 }

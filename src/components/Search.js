@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Search.css";
 import { getPosts } from "../api";
 
@@ -18,12 +18,11 @@ const Search = (props) => {
           setSearch(newSearchvalue);
           const get = await getPosts(token);
           console.log(newSearchvalue);
-          get.map((value, index) => {
+          get.map((value) => {
             let copy = value.title;
             copy.includes(newSearchvalue) ? filteredPosts.push(value) : null;
           });
-          console.log(get);
-          console.log(filteredPosts);
+
           setPosts(filteredPosts);
         }}
       ></input>
