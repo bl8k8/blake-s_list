@@ -21,11 +21,7 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
-  useEffect(async () => {
-    await getPosts().then((response) => {
-      setPosts(response);
-    });
-  }, []);
+
   useEffect(async () => {
     await getPosts(token).then((response) => {
       setPosts(response);
@@ -35,18 +31,16 @@ const App = () => {
   return (
     <div>
       <Header
-        posts={posts}
         setPosts={setPosts}
         user={user}
         setUser={setUser}
         token={token}
         setToken={setToken}
-        messages={messages}
-        setMessages={setMessages}
       />
 
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div>
+          <Search setPosts={setPosts} token={token} />
           <Post setPosts={setPosts} posts={posts} user={user} token={token} />
         </div>
         {user ? (
@@ -55,7 +49,6 @@ const App = () => {
           </>
         ) : null}
       </div>
-      <Search posts={posts} setPosts={setPosts} />
     </div>
   );
 };

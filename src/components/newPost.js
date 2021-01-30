@@ -10,7 +10,7 @@ const NewPost = (props) => {
   const [willDeliver, setWillDeliver] = useState(true);
 
   return (
-    <div id={"newPost"}>
+    <div id={"newPost"} style={{ display: "flex", flexDirection: "column" }}>
       <label>Title</label>
       <input
         type="text"

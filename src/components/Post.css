@@ -1,3 +1,13 @@
 .post {
   box-shadow: 2px 2px 7px 1px rgb(153, 119, 124);
 }
+.messageInfo {
+  margin-top: 2px;
+  background-color: lightgrey;
+  border-top: thick, black;
+  border-bottom: thick black;
+}
+.note {
+  border-bottom: black, thick;
+  padding-bottom: 5px;
+}

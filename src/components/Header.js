@@ -4,13 +4,6 @@ import Button from "./Button";
 import "./Header.css";
 import Input from "./Input";
 import { getPosts } from "../api/index";
-import {
-  BrowserRouter as Router,
-  useHistory,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
 
 const Header = (props) => {
   const {
@@ -28,7 +21,26 @@ const Header = (props) => {
     <div id="Header">
       {user ? (
         <>
-          <Button text={"My Messages"} />
+          {<p>Welcome to Blake's List {user.data.username}!</p>}
+          <Button
+            text={"All Posts"}
+            handler={() => {
+              getPosts(token).then((response) => setPosts(response));
+            }}
+          />
+          <Button
+            text={"My Messages"}
+            handler={() => {
+              getPosts(token).then((response) => {
+                const userPosts = [];
+                response.map((item, index) => {
+                  console.log(item);
+                  item.messages[0] ? userPosts.push(item) : null;
+                });
+                setPosts(userPosts);
+              });
+            }}
+          />
 
           <Button
             text={"My Posts"}

@@ -4,7 +4,7 @@ import { sendMessage } from "../api/index";
 
 const Message = (props) => {
   const [message, setMessage] = useState(null);
-  const { token, id } = props;
+  const { token, id, posts } = props;
 
   return (
     <>
@@ -15,12 +15,9 @@ const Message = (props) => {
         }}
       />
       <Button
-        text={"Submit"}
+        text={"Send Message"}
         handler={() => {
-          console.log(token, "travis");
-          sendMessage(token, id, message).then((response) => {
-            console.log(response);
-          });
+          sendMessage(token, id, message);
         }}
       />
     </>

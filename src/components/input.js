@@ -62,8 +62,6 @@ const Input = (props) => {
               }
             })
             .then((response) => {
-              console.log(token);
-              console.log(response);
               setUser(response);
             });
         }}

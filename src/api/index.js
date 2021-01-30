@@ -2,6 +2,15 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const BASE = "https://strangers-things.herokuapp.com/api/2007-UNF-RM-WEB-PT";
+export async function deletePost(token, postID) {
+  await axios.delete(`${BASE}/posts/${postID}`, {
+    headers: {
+      "Content-Type": "application/json",
+
+      Authorization: "Bearer " + token,
+    },
+  });
+}
 
 export async function getPosts(token) {
   try {
